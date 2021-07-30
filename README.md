@@ -1,5 +1,5 @@
 # pdf_note
 
-###npm install
+npm install
 
-###npm start
+npm start
