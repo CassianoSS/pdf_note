@@ -1,5 +1,7 @@
 # pdf_note
+##Para testar o código
 
-npm install
-
-npm start
+ Instale as dependencias
+### `npm install`
+Inicie o programa
+### `npm start`
