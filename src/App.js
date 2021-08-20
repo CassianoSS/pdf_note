@@ -1,65 +1,56 @@
-import React, { useMemo, useState } from 'react';
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
-// import { Document, Page } from 'react-pdf';
+import React, { useState } from 'react';
+import { Document, Page } from 'react-pdf';
 import samplePDF from './sample.pdf';
+import { pdfjs } from 'react-pdf';
+import { Container, Col, Navbar } from 'react-bootstrap';
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+
 
 export default function Test() {
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
-    setPageNumber(1);
-  }
-
-  function changePage(offset) {
-    setPageNumber(prevPageNumber => prevPageNumber + offset);
-  }
-
-  function previousPage() {
-    changePage(-1);
-  }
-
-  function nextPage() {
-    changePage(1);
   }
 
   return (
     <>
-      <center>
-        
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home">
+            PDF-Project
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+      <Container fluid className="bg-dark">
+        <Col md={{ span: 4, offset: 4 }}>
           <Document
             file={samplePDF}
             onLoadSuccess={onDocumentLoadSuccess}
           >
-            <Page pageNumber={pageNumber} />
+            {Array.from(
+              new Array(numPages),
+              (el, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                />
+              ),
+            )}
           </Document>
-          <div>
-            <p>
-              Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-            </p>
-            <button
-              type="button"
-              disabled={pageNumber <= 1}
-              onClick={previousPage}
 
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              disabled={pageNumber >= numPages}
-              onClick={nextPage}
-            >
-              Next
-            </button>
-          </div>
-        
-      </center>
 
+        </Col>
+      </Container>
     </>
   );
 }
+
 
 
 
