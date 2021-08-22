@@ -19,7 +19,7 @@ class CustomNavbar extends Component {
 }
 
 const StyledCustomNavbar = styled(CustomNavbar)`
-    background-color: darkslategrey;
+    background-color: #424242;
 `;
 
 export default StyledCustomNavbar;
