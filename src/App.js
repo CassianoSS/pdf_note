@@ -1,8 +1,9 @@
 import React from 'react';
 import samplePDF from './sample.pdf';
+import CustomNavbar from './core/custom-navbar.js';
 import { pdfjs } from 'react-pdf';
-import CustomNavbar from './custom-navbar/custom-navbar.js';
-import CustomPageDisplay from './custom-page-display/custom-page-display';
+
+import CustomPageDisplay from './core/custom-page-display';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
