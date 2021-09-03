@@ -5,7 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Styles = styled.div`
   width: 100vw;
-  height: 94.1vh;
+  min-height: 94.25vh;
+  max-height: fit-content;
+
+
   background-color: #424242;
   
 `;

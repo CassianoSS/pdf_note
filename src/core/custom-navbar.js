@@ -25,14 +25,6 @@ const CustomNavbar = () => (
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Item>
-          </Nav.Item>
-          <Nav.Item>
-            ITEM1
-          </Nav.Item>
-          <Nav.Item>
-            ITEM2
-          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
