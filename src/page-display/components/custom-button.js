@@ -13,8 +13,7 @@ background-color: #424242;
 `;
 
 const CustomButton = (props) => (
-  <Styles
-    
+  <Styles    
     variant="secondary"
     onClick={props.onClick}>
     <a> {props.children}</a>
