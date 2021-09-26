@@ -18,8 +18,7 @@ export default function App() {
       <CustomNavbar />
       <GlobalStyle />
       <CustomPageDisplay inputPDF={samplePDF}/>
-
-
+      
     </>
   );
 }

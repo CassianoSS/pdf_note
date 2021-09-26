@@ -15,7 +15,8 @@ export const Highlight = (pageNumber, getRect, color = 'yellow') => {
       y2: getRect.bottom
     },
     color: color,
-    pageNumber: pageNumber
+    pageNumber: pageNumber,
+    show: false
   }
 
   return newHighlight
