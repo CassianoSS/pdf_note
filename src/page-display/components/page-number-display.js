@@ -5,11 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Styles = styled.div`
     font-weight: bold;
-    height: 40px;
-    width: 90px;
-    margin: 5px 5px 5px 5px;
-    padding: 5px 5px 5px 5px; 
-    border: 1px double black;
+    height: auto;
+    width: auto;    
+    margin: 12px;
+    padding: 12px; 
+    border: 1px double #6d6d6d;
+    border-radius: 5px;
     font-size: 1.1rem;
     background-color: #424242;
     color:#bbb;
