@@ -7,7 +7,7 @@ import { faSearchPlus, faSearchMinus, faHighlighter, faPencilRuler } from '@fort
 // local imports
 import PageNumberDisplay from './components/page-number-display';
 import ShowHighlights from './highlights/ShowHighlights.js';
-import { Layout } from '../core/layout.js';
+import { Layout } from '../core/Lqayout.js';
 import CustomButton from './components/custom-button';
 import { Highlight } from './highlights/Highlight';
 import AreaHighlight from './highlights/AreaHighlight';
