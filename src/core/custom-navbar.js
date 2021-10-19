@@ -22,7 +22,7 @@ const Styles = styled.div`
 const CustomNavbar = () => (
   <Styles>
     <Navbar expand="lg">
-      <Navbar.Brand href="/">PDF PROJECT</Navbar.Brand>
+      <Navbar.Brand href="/">PDF Note</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">

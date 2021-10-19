@@ -22,7 +22,7 @@ const CustomPageDisplay = ({ inputPDF }) => {
     const [isHighlightActive, setisHighlightActive] = useState(false);
     const [isAreaHighlightActive, setisAreaHighlightActive] = useState(false);
     const [pageHeight, setpageHeight] = useState(596);
-    const [pageWidth, setpageWidth] = useState(842);
+    const [pageWidth, setpageWidth] = useState(800);
     const [showActiveHighlight, setshowActiveHighlight] = useState(false);
     const [highlights, sethighlights] = useState([{
         id: 111,
