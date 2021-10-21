@@ -5,15 +5,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Styles = styled.div`
     font-weight: bold;
-    height: auto;
-    width: auto;    
-    margin: 12px;
-    padding: 12px; 
+    font-size: 12px;
+    max-height: min-content;
+    margin: 10px;
+    padding: 10px 10px ; 
     border: 1px double #6d6d6d;
-    border-radius: 5px;
-    font-size: 1.1rem;
+    border-radius: 5px;    
     background-color: #424242;
     color:#bbb;
+    display: inline-block;
+
+
 
 `;
 

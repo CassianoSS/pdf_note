@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
     max-height: 840px;
     }
     body{
-        max-height: 1000px;
+        max-height: fit-content;
         background-color: #424242;
     }
 
