@@ -12,10 +12,12 @@ import CustomButton from './components/custom-button';
 import { Highlight } from './highlights/Highlight';
 import AreaHighlight from './highlights/AreaHighlight';
 import CustomStatusDisplay from './components/status-display';
+import Toolbar from './components/button-toolbar';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const CustomPageDisplay = ({ inputPDF }) => {
+function CustomPageDisplay({ inputPDF }) {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
     const [currentScale, setCurrentScale] = useState(1.0);
@@ -96,6 +98,10 @@ const CustomPageDisplay = ({ inputPDF }) => {
         setisAreaHighlightActive((isAreaHighlightActive) => !isAreaHighlightActive);
     }
 
+    function toggleShowActiveHighlight() {
+        setshowActiveHighlight((showActiveHighlight) => !showActiveHighlight)
+    }
+
     useEffect(() => {
         if (isAreaHighlightActive && isHighlightActive) {
             setisHighlightActive(false);
@@ -115,98 +121,19 @@ const CustomPageDisplay = ({ inputPDF }) => {
         <Layout>
             <Row>
                 {/* button toolbar */}
-                <ButtonToolbar aria="Toolbar with button groups">
-                    <ButtonGroup className="me-2 justify-content-between" aria-label="First group">
-                        <CustomButton
-                            disabled={pageNumber <= 1}
-                            onClick={previousPage}>
-                            Previous
-                        </CustomButton>
-                        <CustomButton
-                            disabled={pageNumber >= numPages}
-                            onClick={nextPage}>
-                            Next
-                        </CustomButton>
-                    </ButtonGroup>
-                    <ButtonGroup className="me-2" aria-label="Second group">
-                        <CustomButton
-                            onClick={zoomOut}
-                        >
-
-                            <FontAwesomeIcon
-                                icon={faSearchMinus}
-                                color="white"
-                            />
-                        </CustomButton>
-                        <CustomButton
-                            onClick={zoomIn}
-                        >
-                            <FontAwesomeIcon
-                                icon={faSearchPlus}
-                                color="white"
-                            />
-                        </CustomButton>
-                    </ButtonGroup>
-                    <ButtonGroup>
-                        <CustomButton
-                            onClick={toggleIsHighlightActive}
-                        >
-                            <FontAwesomeIcon
-                                icon={faHighlighter}
-                                color="white"
-                            />
-                        </CustomButton>
-                        <CustomButton
-                            onClick={toggleisAreaHighlightActive}
-                        >
-                            <FontAwesomeIcon
-                                icon={faPencilRuler}
-                                color="white"
-                            />
-                        </CustomButton>
-                        <CustomButton
-                            onClick={() => setshowActiveHighlight(!showActiveHighlight)}
-                        >
-                            Show highlights
-                        </CustomButton>
-                    </ButtonGroup>
-                    <PageNumberDisplay>
-                        Page {pageNumber || (numPages ? 1 : '--')}/{numPages || '--'}
-                    </PageNumberDisplay>
-                    <Col md={2}>
-                        {
-                            (function () {
-                                if (!isHighlightActive && !isAreaHighlightActive) {
-                                    return (
-                                        <>
-                                            <CustomStatusDisplay>
-                                                Nothing is happening
-                                            </CustomStatusDisplay>
-                                        </>
-                                    );
-                                }
-                                else if (isHighlightActive && !isAreaHighlightActive) {
-                                    return (
-                                        <>
-                                            <CustomStatusDisplay>
-                                                Highlight is active
-                                            </CustomStatusDisplay>
-                                        </>
-                                    );
-                                }
-                                else if (!isHighlightActive && isAreaHighlightActive) {
-                                    return (
-                                        <>
-                                            <CustomStatusDisplay>
-                                                Area Highlight is active
-                                            </CustomStatusDisplay>
-                                        </>
-                                    );
-                                }
-                            })()
-                        }
-                    </Col>
-                </ButtonToolbar>
+                <Toolbar
+                    pageNumber={pageNumber}
+                    previousPage={previousPage}
+                    numPages={numPages}
+                    nextPage={nextPage}
+                    zoomIn={zoomIn}
+                    zoomOut={zoomOut}
+                    isHighlightActive={isHighlightActive}
+                    isAreaHighlightActive={isAreaHighlightActive}
+                    toggleIsHighlightActive={toggleIsHighlightActive}
+                    toggleisAreaHighlightActive={toggleisAreaHighlightActive}
+                    toggleShowActiveHighlight={toggleShowActiveHighlight}
+                />
             </Row>
             {/* page display */}
             <Row>
