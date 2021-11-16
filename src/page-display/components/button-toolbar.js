@@ -8,13 +8,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearchPlus, faSearchMinus, faHighlighter, faPencilRuler } from '@fortawesome/free-solid-svg-icons';
 
 const Styles = styled(ButtonToolbar)`
-    
-    
-     
+    align-content: center;
+    /* display: inline; */
+
 `;
 
-function Toolbar({ pageNumber, previousPage, numPages, nextPage, zoomIn, zoomOut, isHighlightActive, isAreaHighlightActive, toggleIsHighlightActive, toggleisAreaHighlightActive, toggleShowActiveHighlight }) {
-
+function Toolbar({
+    pageNumber,
+    previousPage,
+    numPages,
+    nextPage,
+    zoomIn,
+    zoomOut,
+    isHighlightActive,
+    isAreaHighlightActive,
+    toggleIsHighlightActive,
+    toggleisAreaHighlightActive,
+    toggleShowActiveHighlight
+}) {
     return (
         <>
             <Styles>
@@ -112,6 +123,5 @@ function Toolbar({ pageNumber, previousPage, numPages, nextPage, zoomIn, zoomOut
         </>
     );
 }
-
 
 export default Toolbar;

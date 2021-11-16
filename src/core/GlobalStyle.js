@@ -14,9 +14,14 @@ export const GlobalStyle = createGlobalStyle`
     right: 0;
     max-height: 840px;
     }
+
     body{
         max-height: fit-content;
         background-color: #424242;
+    }
+
+    .btn-toolbar{
+        justify-content: center;
     }
 
 

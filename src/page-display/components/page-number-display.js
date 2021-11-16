@@ -4,17 +4,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const Styles = styled.div`
-    font-weight: bold;
-    font-size: 12px;
-    max-height: min-content;
-    margin: 10px;
-    padding: 10px 10px ; 
-    border: 1px double #6d6d6d;
-    border-radius: 5px;    
-    background-color: #424242;
-    color:#bbb;
-    display: inline-block;
-
+   
+    p{
+        font-weight: bold;
+        font-size: small;        
+        padding: 0px;
+        color:#bbb;
+        align-self: center;
+        display: inline-flex;
+        border: 1px double #6d6d6d;
+        border-radius: 5px;    
+        background-color: #424242;
+        margin: 0.78rem 0.3rem;
+        padding: 16px 10px ; 
+        max-height: min-content;
+    }
 
 
 `;

@@ -5,15 +5,12 @@ import { Col, Row, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearchPlus, faSearchMinus, faHighlighter, faPencilRuler } from '@fortawesome/free-solid-svg-icons';
 // local imports
-import PageNumberDisplay from './components/page-number-display';
 import ShowHighlights from './highlights/ShowHighlights.js';
 import { Layout } from '../core/Layout.js';
-import CustomButton from './components/custom-button';
 import { Highlight } from './highlights/Highlight';
 import AreaHighlight from './highlights/AreaHighlight';
-import CustomStatusDisplay from './components/status-display';
 import Toolbar from './components/button-toolbar';
-
+import PageDisplay from './components/page-display.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -136,72 +133,22 @@ function CustomPageDisplay({ inputPDF }) {
                 />
             </Row>
             {/* page display */}
-            <Row>
-                <center>
-                    <Col>
-                        <Document
-                            file={inputPDF}
-                            onLoadSuccess={onDocumentLoadSuccess}
-                        >
-                            <ShowHighlights
-                                highlights={highlights}
-                                width={pageWidth}
-                                height={pageHeight}
-                                pageNumber={pageNumber}
-                                isActive={showActiveHighlight}
-                                scale={currentScale}
-                            />
-                            {
-                                (function () {
-                                    if (!isHighlightActive && !isAreaHighlightActive) {
-                                        return (
-                                            <>
-                                                <Page
-                                                    className="page"
-                                                    onLoadSuccess={onPageLoad}
-                                                    pageNumber={pageNumber}
-                                                    scale={currentScale} />
-                                            </>
-                                        );
-                                    } else if (isHighlightActive && !isAreaHighlightActive) {
-                                        return (
-                                            <>
-                                                <Page
-                                                    className="page"
-                                                    onLoadSuccess={onPageLoad}
-                                                    pageNumber={pageNumber}
-                                                    scale={currentScale}
-                                                    onMouseUp={event => window.getSelection().toString() !== '' ? addHighlight() : null}
-                                                />
-                                            </>
-                                        );
-                                    } else if (!isHighlightActive && isAreaHighlightActive) {
-                                        return (
-                                            <>
-                                                <>
-                                                    <AreaHighlight
-                                                        width={pageWidth}
-                                                        height={pageHeight}
-                                                        addHighlight={addHighlight}
-                                                        pageNumber={pageNumber}
-                                                        areaModeClick={isAreaHighlightActive} />
-                                                </>
-                                                <>
-                                                    <Page
-                                                        className="page"
-                                                        onLoadSuccess={onPageLoad}
-                                                        pageNumber={pageNumber}
-                                                        scale={currentScale} />
-                                                </>
 
-                                            </>
-                                        );
-                                    }
-                                })()
-                            }
-                        </Document>
-                    </Col>
-                </center>
+            <Row>
+                <PageDisplay
+                    inputPDF={inputPDF}
+                    onDocumentLoadSuccess={onDocumentLoadSuccess}
+                    highlights={highlights}
+                    pageWidth={pageWidth}
+                    pageHeight={pageHeight}
+                    showActiveHighlight={showActiveHighlight}
+                    pageNumber={pageNumber}
+                    currentScale={currentScale}
+                    isHighlightActive={isHighlightActive}
+                    isAreaHighlightActive={isAreaHighlightActive}
+                    onPageLoad={onPageLoad}
+                    addHighlight={addHighlight}
+                />
             </Row>
         </Layout>
     );
