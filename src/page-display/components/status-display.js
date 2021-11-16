@@ -5,7 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Styles = styled(Alert)`
 
-margin: 12px;
+max-height: fit-content;
+margin: 10px;
 padding: 12px; 
 background-color: #424242;
 border: 1px double #6d6d6d;
@@ -16,7 +17,7 @@ color:#bbb;
 
 const CustomStatusDisplay = (props) => (
   <Styles
-    variant="secondary"
+    // variant="secondary"
     // onClick={props.onClick}
     >
     <p> {props.children}</p>

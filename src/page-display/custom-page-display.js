@@ -5,24 +5,23 @@ import { Col, Row, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearchPlus, faSearchMinus, faHighlighter, faPencilRuler } from '@fortawesome/free-solid-svg-icons';
 // local imports
-import PageNumberDisplay from './components/page-number-display';
 import ShowHighlights from './highlights/ShowHighlights.js';
-import { Layout } from '../core/layout.js';
-import CustomButton from './components/custom-button';
+import { Layout } from '../core/Layout.js';
 import { Highlight } from './highlights/Highlight';
 import AreaHighlight from './highlights/AreaHighlight';
-import CustomStatusDisplay from './components/status-display';
+import Toolbar from './components/button-toolbar';
+import PageDisplay from './components/page-display.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const CustomPageDisplay = ({ inputPDF }) => {
+function CustomPageDisplay({ inputPDF }) {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
     const [currentScale, setCurrentScale] = useState(1.0);
     const [isHighlightActive, setisHighlightActive] = useState(false);
     const [isAreaHighlightActive, setisAreaHighlightActive] = useState(false);
     const [pageHeight, setpageHeight] = useState(596);
-    const [pageWidth, setpageWidth] = useState(842);
+    const [pageWidth, setpageWidth] = useState(800);
     const [showActiveHighlight, setshowActiveHighlight] = useState(false);
     const [highlights, sethighlights] = useState([{
         id: 111,
@@ -96,6 +95,10 @@ const CustomPageDisplay = ({ inputPDF }) => {
         setisAreaHighlightActive((isAreaHighlightActive) => !isAreaHighlightActive);
     }
 
+    function toggleShowActiveHighlight() {
+        setshowActiveHighlight((showActiveHighlight) => !showActiveHighlight)
+    }
+
     useEffect(() => {
         if (isAreaHighlightActive && isHighlightActive) {
             setisHighlightActive(false);
@@ -115,166 +118,37 @@ const CustomPageDisplay = ({ inputPDF }) => {
         <Layout>
             <Row>
                 {/* button toolbar */}
-                <ButtonToolbar aria="Toolbar with button groups">
-                    <ButtonGroup className="me-2 justify-content-between" aria-label="First group">
-                        <CustomButton
-                            disabled={pageNumber <= 1}
-                            onClick={previousPage}>
-                            Previous
-                        </CustomButton>
-                        <CustomButton
-                            disabled={pageNumber >= numPages}
-                            onClick={nextPage}>
-                            Next
-                        </CustomButton>
-                    </ButtonGroup>
-                    <ButtonGroup className="me-2" aria-label="Second group">
-                        <CustomButton
-                            onClick={zoomOut}
-                        >
-
-                            <FontAwesomeIcon
-                                icon={faSearchMinus}
-                                color="white"
-                            />
-                        </CustomButton>
-                        <CustomButton
-                            onClick={zoomIn}
-                        >
-                            <FontAwesomeIcon
-                                icon={faSearchPlus}
-                                color="white"
-                            />
-                        </CustomButton>
-                    </ButtonGroup>
-                    <ButtonGroup>
-                        <CustomButton
-                            onClick={toggleIsHighlightActive}
-                        >
-                            <FontAwesomeIcon
-                                icon={faHighlighter}
-                                color="white"
-                            />
-                        </CustomButton>
-                        <CustomButton
-                            onClick={toggleisAreaHighlightActive}
-                        >
-                            <FontAwesomeIcon
-                                icon={faPencilRuler}
-                                color="white"
-                            />
-                        </CustomButton>
-                        <CustomButton
-                            onClick={() => setshowActiveHighlight(!showActiveHighlight)}
-                        >
-                            Show highlights
-                        </CustomButton>
-                    </ButtonGroup>
-                    <PageNumberDisplay>
-                        Page {pageNumber || (numPages ? 1 : '--')}/{numPages || '--'}
-                    </PageNumberDisplay>
-                    <Col md={2}>
-                        {
-                            (function () {
-                                if (!isHighlightActive && !isAreaHighlightActive) {
-                                    return (
-                                        <>
-                                            <CustomStatusDisplay>
-                                                Nothing is happening
-                                            </CustomStatusDisplay>
-                                        </>
-                                    );
-                                }
-                                else if (isHighlightActive && !isAreaHighlightActive) {
-                                    return (
-                                        <>
-                                            <CustomStatusDisplay>
-                                                Highlight is active
-                                            </CustomStatusDisplay>
-                                        </>
-                                    );
-                                }
-                                else if (!isHighlightActive && isAreaHighlightActive) {
-                                    return (
-                                        <>
-                                            <CustomStatusDisplay>
-                                                Area Highlight is active
-                                            </CustomStatusDisplay>
-                                        </>
-                                    );
-                                }
-                            })()
-                        }
-                    </Col>
-                </ButtonToolbar>
+                <Toolbar
+                    pageNumber={pageNumber}
+                    previousPage={previousPage}
+                    numPages={numPages}
+                    nextPage={nextPage}
+                    zoomIn={zoomIn}
+                    zoomOut={zoomOut}
+                    isHighlightActive={isHighlightActive}
+                    isAreaHighlightActive={isAreaHighlightActive}
+                    toggleIsHighlightActive={toggleIsHighlightActive}
+                    toggleisAreaHighlightActive={toggleisAreaHighlightActive}
+                    toggleShowActiveHighlight={toggleShowActiveHighlight}
+                />
             </Row>
             {/* page display */}
-            <Row>
-                <center>
-                    <Col>
-                        <Document
-                            file={inputPDF}
-                            onLoadSuccess={onDocumentLoadSuccess}
-                        >
-                            <ShowHighlights
-                                highlights={highlights}
-                                width={pageWidth}
-                                height={pageHeight}
-                                pageNumber={pageNumber}
-                                isActive={showActiveHighlight}
-                                scale={currentScale}
-                            />
-                            {
-                                (function () {
-                                    if (!isHighlightActive && !isAreaHighlightActive) {
-                                        return (
-                                            <>
-                                                <Page
-                                                    className="page"
-                                                    onLoadSuccess={onPageLoad}
-                                                    pageNumber={pageNumber}
-                                                    scale={currentScale} />
-                                            </>
-                                        );
-                                    } else if (isHighlightActive && !isAreaHighlightActive) {
-                                        return (
-                                            <>
-                                                <Page
-                                                    className="page"
-                                                    onLoadSuccess={onPageLoad}
-                                                    pageNumber={pageNumber}
-                                                    scale={currentScale}
-                                                    onMouseUp={event => window.getSelection().toString() !== '' ? addHighlight() : null}
-                                                />
-                                            </>
-                                        );
-                                    } else if (!isHighlightActive && isAreaHighlightActive) {
-                                        return (
-                                            <>
-                                                <>
-                                                    <AreaHighlight
-                                                        width={pageWidth}
-                                                        height={pageHeight}
-                                                        addHighlight={addHighlight}
-                                                        pageNumber={pageNumber}
-                                                        areaModeClick={isAreaHighlightActive} />
-                                                </>
-                                                <>
-                                                    <Page
-                                                        className="page"
-                                                        onLoadSuccess={onPageLoad}
-                                                        pageNumber={pageNumber}
-                                                        scale={currentScale} />
-                                                </>
 
-                                            </>
-                                        );
-                                    }
-                                })()
-                            }
-                        </Document>
-                    </Col>
-                </center>
+            <Row>
+                <PageDisplay
+                    inputPDF={inputPDF}
+                    onDocumentLoadSuccess={onDocumentLoadSuccess}
+                    highlights={highlights}
+                    pageWidth={pageWidth}
+                    pageHeight={pageHeight}
+                    showActiveHighlight={showActiveHighlight}
+                    pageNumber={pageNumber}
+                    currentScale={currentScale}
+                    isHighlightActive={isHighlightActive}
+                    isAreaHighlightActive={isAreaHighlightActive}
+                    onPageLoad={onPageLoad}
+                    addHighlight={addHighlight}
+                />
             </Row>
         </Layout>
     );
