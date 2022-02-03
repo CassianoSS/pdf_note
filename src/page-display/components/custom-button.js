@@ -9,10 +9,13 @@ margin: 10px;
 padding: 15px; 
 border-radius: 10px;
 
-background-color: #424242;
+/* background-color: #424242;
 &:focused{
   background-color: #6d6d6d;
-}
+} */
+
+background-color: ${(props) => (props.isActive ? "#424242" : "#6d6d6d")};
+color: "white";
   
 `;
 
