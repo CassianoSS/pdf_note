@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
 
-function ShowHighlights({
-  highlights,
-  width,
-  height,
-  pageNumber,
-  isActive,
-}) {
-
+function ShowHighlights({ highlights, width, height, pageNumber, isActive }) {
   useEffect(() => {
+    // class="react-pdf__Page__canvas"
     var c = document.getElementById("highlightCanvas");
     var ctx = c.getContext("2d");
     // Clear the canvas
@@ -27,6 +21,7 @@ function ShowHighlights({
     var scaleY = c.height / rect.height;
 
     // Draw all highlights on canvas
+
     if (isActive) {
       highlights
         .filter(

@@ -24,14 +24,16 @@ function CustomPageDisplay({ inputPDF }) {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [currentScale, setCurrentScale] = useState(1.0);
-  const [isHighlightActive, setisHighlightActive] = useState(false);
+  const [isHighlightActive, setisHighlightActive] = useState(true);
   const [isAreaHighlightActive, setisAreaHighlightActive] = useState(false);
   const [pageHeight, setpageHeight] = useState(596);
   const [pageWidth, setpageWidth] = useState(800);
   const [showActiveHighlight, setshowActiveHighlight] = useState(false);
   const [color, setColor] = useState("yellow");
   const [tag, setTag] = useState("");
-  const [labels, setLabels] = useState({});
+  const [labels, setLabels] = useState({
+    label1: { color: "yellow", type: "Geral" },
+  });
   const [highlights, setHighlights] = useState([]);
 
   function addHighlight(color, rectPosition = {}, area = false) {
@@ -172,6 +174,7 @@ function CustomPageDisplay({ inputPDF }) {
     }
     return () => currentScale;
   }, [currentScale]);
+
   return (
     <Layout>
       <Row>

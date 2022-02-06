@@ -17,60 +17,63 @@ function PageDisplay({
   highlights,
   pageWidth,
   pageHeight,
-  showActiveHighlight,
+  // showActiveHighlight,
   pageNumber,
-  currentScale,
+  // currentScale,
   isHighlightActive,
   isAreaHighlightActive,
   onPageLoad,
   addHighlight,
   color,
 }) {
+  
   return (
     <>
       <center>
         {/* <Col> */}
-          <ScrollableDocument>
-            <Document
-              file={inputPDF}
-              onLoadSuccess={onDocumentLoadSuccess}
-              style={{
-                display: "inline",
-                textAlign: "center",
-                alignItems: "center",
-              }}
-            >
-              <ShowHighlights
-                highlights={highlights}
-                width={pageWidth}
-                height={pageHeight}
-                pageNumber={pageNumber}
-                isActive={showActiveHighlight}
-                scale={currentScale}
-              />
-              <AreaHighlight
-                width={pageWidth}
-                height={pageHeight}
-                addHighlight={addHighlight}
-                pageNumber={pageNumber}
-                color={color}
-                areaModeClick={isAreaHighlightActive}
-              />
+        <ScrollableDocument>
+          <Document
+            file={inputPDF}
+            onLoadSuccess={onDocumentLoadSuccess}
+            style={{
+              display: "inline",
+              textAlign: "center",
+              alignItems: "center",
+            }}
 
-              <center>
-                {/* Component to take a pdf page */}
-                <Page
-                  pageNumber={pageNumber}
-                  onMouseUp={(event) =>
-                    window.getSelection().toString() !== ""
-                      ? addHighlight(color)
-                      : null
-                  }
-                  onLoadSuccess={onPageLoad}
-                />
-              </center>
-            </Document>
-          </ScrollableDocument>
+          >
+            <ShowHighlights
+              highlights={highlights}
+              width={pageWidth}
+              height={pageHeight}
+              pageNumber={pageNumber}
+              isActive={isHighlightActive}
+              
+            />
+            <AreaHighlight
+              width={pageWidth}
+              height={pageHeight}
+              addHighlight={addHighlight}
+              pageNumber={pageNumber}
+              color={color}
+              areaModeClick={isAreaHighlightActive}
+            />
+
+            <center>
+              {/* Component to take a pdf page */}
+              <Page
+                
+                pageNumber={pageNumber}
+                onMouseUp={(event) =>
+                  window.getSelection().toString() !== ""
+                    ? addHighlight(color)
+                    : null
+                }
+                onLoadSuccess={onPageLoad}
+              />
+            </center>
+          </Document>
+        </ScrollableDocument>
         {/* </Col> */}
       </center>
     </>
