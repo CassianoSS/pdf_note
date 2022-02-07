@@ -81,6 +81,16 @@ function CustomPageDisplay({ inputPDF }) {
     return false;
   }
 
+  function handleSaveToPC(jsonData) {
+    const fileData = JSON.stringify(jsonData);
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = "filename.json";
+    link.href = url;
+    link.click();
+  }
+
   function submit() {
     const data = { pages: [] };
     var pageInsert = Array(numPages).fill(-1);
@@ -95,12 +105,7 @@ function CustomPageDisplay({ inputPDF }) {
       }
     });
     console.log(data);
-    // api
-    //   .post(`router-annotation/cadastrarbucket/${props.row.id}`, data)
-    //   .then((resp) => alert("Anotações salvas!"))
-    //   .catch((err) => alert("Erro ao salvar anotações!\n" + err.toString()));
-    // setColor("yellow");
-    // setTag("");
+    handleSaveToPC(data);
   }
 
   function onDocumentLoadSuccess({ numPages }) {
