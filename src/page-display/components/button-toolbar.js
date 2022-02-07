@@ -2,7 +2,12 @@ import React from "react";
 import CustomButton from "./custom-button";
 import PageNumberDisplay from "./page-number-display";
 import CustomStatusDisplay from "./status-display";
-import { Col, Row, ButtonGroup, ButtonToolbar } from "react-bootstrap";
+import {
+  OverlayTrigger,
+  Tooltip,
+  ButtonGroup,
+  ButtonToolbar,
+} from "react-bootstrap";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +21,17 @@ const Styles = styled(ButtonToolbar)`
   align-content: center;
   /* display: inline; */
 `;
+
+const IconButton = styled.button`
+  height: fit-content;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: ${(props) => (props.isActive ? "#373737" : "#6d6d6d")};
+  color: "white";
+`;
+
 
 function Toolbar({
   pageNumber,
@@ -65,18 +81,27 @@ function Toolbar({
                     </CustomButton> */}
         </ButtonGroup>
         <ButtonGroup>
-          <CustomButton
-            isActive={isHighlightActive}
-            onClick={toggleIsHighlightActive}
+          <OverlayTrigger
+            overlay={<Tooltip id="tooltip-disabled">Highlight</Tooltip>}
           >
-            <FontAwesomeIcon icon={faHighlighter} color="white" />
-          </CustomButton>
-          <CustomButton
-            isActive={isAreaHighlightActive}
-            onClick={toggleisAreaHighlightActive}
+            <IconButton
+              isActive={isHighlightActive}
+              onClick={toggleIsHighlightActive}
+            >
+              <FontAwesomeIcon icon={faHighlighter} color="white" />
+            </IconButton>
+          </OverlayTrigger>
+
+          <OverlayTrigger
+            overlay={<Tooltip id="tooltip-disabled">Area Highlight</Tooltip>}
           >
-            <FontAwesomeIcon icon={faPencilRuler} color="white" />
-          </CustomButton>
+            <IconButton
+              isActive={isAreaHighlightActive}
+              onClick={toggleisAreaHighlightActive}
+            >
+              <FontAwesomeIcon icon={faPencilRuler} color="white" />
+            </IconButton>
+          </OverlayTrigger>
           {/* <CustomButton
                         onClick={toggleShowActiveHighlight}
                     >

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CustomButton from "./custom-button";
-// import Labels from "./labels-button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import {
   Col,
