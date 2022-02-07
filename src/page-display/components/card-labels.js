@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CustomButton from "./custom-button";
 // import Labels from "./labels-button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import {
   Col,
@@ -10,6 +11,7 @@ import {
   Button,
   Modal,
   OverlayTrigger,
+  Form,
   Tooltip,
 } from "react-bootstrap";
 import styled from "styled-components";
@@ -37,14 +39,12 @@ const PlusButton = styled.button`
 
 const Labels = styled(Button)`
   /* background: ${(props) => (props.isActive ? "#424242" : "#8d8d8d")}; */
-  
+
   border: none;
   padding: 0.5rem 0.7rem;
   border-radius: 0.7rem;
   margin: 0.3rem;
-  
 `;
-
 
 const CustomModal = styled(Modal)`
   background: #9e9e9e;
@@ -71,12 +71,6 @@ function CardLabels({ labels, setLabel, changeLabels }) {
   const [typeLabel, setTypeLabel] = useState("Geral");
   const [typeLabels, setTypeLabels] = useState([]);
   const [filteredLabels, setFilteredLabels] = useState({});
-  const [isLabelActive, setIsLabelActive] = useState(true);
-
-  function toggleLabel() {
-    setIsLabelActive((isLabelActive) => !isLabelActive);
-    console.log(isLabelActive);
-  }
 
   useEffect(() => {
     var newFilteredLabels = Object.entries(labels).filter(
@@ -130,9 +124,12 @@ function CardLabels({ labels, setLabel, changeLabels }) {
               </Modal.Header>
               <Modal.Body style={{ background: "#bdbdbd" }}>
                 <Row>
-                  <Col>
+                  <Col md={4}>
                     <h5>Label</h5>
-                    <input
+                    <Form.Control
+                      type="text"
+                      as="input"
+                      size="sm"
                       value={newLabel}
                       onChange={(e) => setNewLabel(e.target.value)}
                       placeholder="Enter label"
@@ -140,6 +137,7 @@ function CardLabels({ labels, setLabel, changeLabels }) {
                     />
                   </Col>
                   <Col>
+                    <h5 style={{ marginLeft: "0.9rem" }}>Types</h5>
                     <DropdownTypes
                       types={typeLabels}
                       setTypeLabel={setTypeLabel}
@@ -151,6 +149,7 @@ function CardLabels({ labels, setLabel, changeLabels }) {
               </Modal.Body>
               <Modal.Footer style={{ background: "#bdbdbd" }}>
                 <Labels
+                  variant="secondary"
                   onClick={() => {
                     setNewLabelModal(false);
 
@@ -166,10 +165,8 @@ function CardLabels({ labels, setLabel, changeLabels }) {
             {Object.keys(filteredLabels).map((label) => (
               <Labels
                 variant="dark"
-                isActive={isLabelActive}
                 style={{ color: labels[label]["color"] }}
                 onClick={() => {
-                  toggleLabel();
                   setLabel(label);
                 }}
               >
