@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
-import { Col, Row, ButtonGroup, ButtonToolbar } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSearchPlus,
-  faSearchMinus,
-  faHighlighter,
-  faPencilRuler,
-} from "@fortawesome/free-solid-svg-icons";
+import { Col, Row } from "react-bootstrap";
 // local imports
-import ShowHighlights from "./highlights/ShowHighlights.js";
 import { Layout } from "../core/Layout.js";
 import { Highlight } from "./highlights/Highlight";
-import AreaHighlight from "./highlights/AreaHighlight";
 import Toolbar from "./components/button-toolbar";
 import PageDisplay from "./components/page-display.js";
 import CardLabels from "./components/card-labels.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import CardInfo from "./components/card-info.js";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function CustomPageDisplay({ inputPDF }) {
@@ -35,6 +26,7 @@ function CustomPageDisplay({ inputPDF }) {
     label1: { color: "yellow", type: "Geral" },
   });
   const [highlights, setHighlights] = useState([]);
+  // const [data, setData] = useState();
 
   function addHighlight(color, rectPosition = {}, area = false) {
     if (!area) {
@@ -91,7 +83,7 @@ function CustomPageDisplay({ inputPDF }) {
     link.click();
   }
 
-  function submit() {
+  function refreshData() {
     const data = { pages: [] };
     var pageInsert = Array(numPages).fill(-1);
     highlights.forEach((highlight) => {
@@ -104,7 +96,23 @@ function CustomPageDisplay({ inputPDF }) {
         data["pages"][position]["highlights"].push(highlight);
       }
     });
-    console.log(data);
+    return data;
+  }
+  function submit() {
+    // const data = { pages: [] };
+    // var pageInsert = Array(numPages).fill(-1);
+    // highlights.forEach((highlight) => {
+    //   var pageNumber = highlight["pageNumber"];
+    //   if (pageInsert[pageNumber - 1] == -1) {
+    //     data["pages"].push({ pageNumber, highlights: [highlight] });
+    //     pageInsert[pageNumber - 1] = data["pages"].length - 1;
+    //   } else {
+    //     var position = pageInsert[pageNumber - 1];
+    //     data["pages"][position]["highlights"].push(highlight);
+    //   }
+    // });
+    // console.log(data);
+    const data = refreshData();
     handleSaveToPC(data);
   }
 
@@ -165,29 +173,25 @@ function CustomPageDisplay({ inputPDF }) {
     setLabels(l);
   }
 
-  useEffect(() => {
-    if (isAreaHighlightActive && isHighlightActive) {
-      setisHighlightActive(false);
-      setisAreaHighlightActive(false);
-    }
-    if (currentScale > 2.5) {
-      alert("Cannot Zoom In More");
-      setCurrentScale(1.0);
-    } else if (currentScale < 0.5) {
-      alert("Cannot Zoom Out More");
-      setCurrentScale(1.0);
-    }
-    return () => currentScale;
-  }, [currentScale]);
+  // useEffect(() => {
+  //   if (isAreaHighlightActive && isHighlightActive) {
+  //     setisHighlightActive(false);
+  //     setisAreaHighlightActive(false);
+  //   }
+  // });
 
   return (
     <Layout>
       <Row>
-        <CardLabels
-          labels={labels}
-          setLabel={handleLabel}
-          changeLabels={addNewLabel}
-        />
+        <Col md={4}>
+          <CardLabels
+            labels={labels}
+            setLabel={handleLabel}
+            changeLabels={addNewLabel}
+          />
+
+          <CardInfo data={highlights} />
+        </Col>
         <Col md={8}>
           {/* button toolbar */}
           <Toolbar

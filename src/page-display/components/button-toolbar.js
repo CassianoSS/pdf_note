@@ -32,7 +32,6 @@ const IconButton = styled.button`
   color: "white";
 `;
 
-
 function Toolbar({
   pageNumber,
   previousPage,

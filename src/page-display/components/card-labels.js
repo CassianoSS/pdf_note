@@ -35,8 +35,6 @@ const PlusButton = styled.button`
 `;
 
 const Labels = styled(Button)`
-  /* background: ${(props) => (props.isActive ? "#424242" : "#8d8d8d")}; */
-
   border: none;
   padding: 0.5rem 0.7rem;
   border-radius: 0.7rem;
@@ -87,7 +85,7 @@ function CardLabels({ labels, setLabel, changeLabels }) {
 
   return (
     <>
-      <Col md={4}>
+      {/* <Col md={4}> */}
         <CustomCard>
           <Card.Header as="h3">
             <Row>
@@ -172,7 +170,7 @@ function CardLabels({ labels, setLabel, changeLabels }) {
             ))}
           </Card.Body>
         </CustomCard>
-      </Col>
+      {/* </Col> */}
     </>
   );
 }
