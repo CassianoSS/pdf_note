@@ -15,7 +15,7 @@ function CustomPageDisplay({ inputPDF }) {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [currentScale, setCurrentScale] = useState(1.0);
-  const [isHighlightActive, setisHighlightActive] = useState(true);
+  const [isHighlightActive, setisHighlightActive] = useState(false);
   const [isAreaHighlightActive, setisAreaHighlightActive] = useState(false);
   const [pageHeight, setpageHeight] = useState(596);
   const [pageWidth, setpageWidth] = useState(800);
@@ -26,7 +26,7 @@ function CustomPageDisplay({ inputPDF }) {
     label1: { color: "yellow", type: "Geral" },
   });
   const [highlights, setHighlights] = useState([]);
-  // const [data, setData] = useState();
+  const [data, setData] = useState(refreshData());
 
   function addHighlight(color, rectPosition = {}, area = false) {
     if (!area) {
@@ -35,7 +35,7 @@ function CustomPageDisplay({ inputPDF }) {
       const getRange = textSelected.getRangeAt(0);
       // Get the text position on screen
       rectPosition = getRange.getBoundingClientRect().toJSON();
-      textSelected.removeAllRanges();
+      // textSelected.removeAllRanges();
     }
 
     if (checkEquals(rectPosition)) return;
@@ -44,6 +44,8 @@ function CustomPageDisplay({ inputPDF }) {
       ...highlights,
       Highlight(pageNumber, rectPosition, color, tag),
     ]);
+    const newData = refreshData();
+    setData({...data, newData});
   }
 
   function checkEquals(rectPosition) {
@@ -190,7 +192,7 @@ function CustomPageDisplay({ inputPDF }) {
             changeLabels={addNewLabel}
           />
 
-          <CardInfo data={highlights} />
+          <CardInfo data={data} />
         </Col>
         <Col md={8}>
           {/* button toolbar */}
