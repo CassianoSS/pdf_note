@@ -14,6 +14,6 @@ export const Highlight = (pageNumber, getRect, color = "yellow", tag = "") => {
     tag,
     draw: false,
   };
-
+  window.getSelection().removeAllRanges();
   return newHighlight;
 };

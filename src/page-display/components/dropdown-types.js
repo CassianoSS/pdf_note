@@ -20,7 +20,7 @@ function DropdownTypes({ selectedType, setTypeLabel, types, text }) {
               variant="secondary"
               style={{
                 borderRadius: "0.7rem",
-                backgroundColor: "#9e9e9e",
+                // backgroundColor: "#9e9e9e",
                 border: "none",
               }}
             >
@@ -30,7 +30,7 @@ function DropdownTypes({ selectedType, setTypeLabel, types, text }) {
             <Dropdown.Menu
               variant="dark"
               aria-expanded={show}
-              style={{ background: "#6d6d6d" }}
+              // style={{ background: "#6d6d6d" }}
             >
               {types.map((type, index) => (
                 <Dropdown.Item
@@ -53,7 +53,7 @@ function DropdownTypes({ selectedType, setTypeLabel, types, text }) {
                 type="text"
                 placeholder="New File Type"
                 onChange={(e) => setTypeLabel(e.target.value)}
-                style={{ background: "#bdbdbd" }}
+                // style={{ background: "#bdbdbd" }}
               />
             </>
           )}

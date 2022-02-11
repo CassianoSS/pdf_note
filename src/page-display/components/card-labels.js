@@ -18,7 +18,7 @@ const CustomCard = styled(Card)`
   margin: 5rem -2rem;
   background: #cfcfcf;
   height: 15rem;
-  /* display: flex; */
+  overflow-y: auto;  
 `;
 
 const PlusButton = styled.button`
@@ -42,7 +42,7 @@ const Labels = styled(Button)`
 `;
 
 const CustomModal = styled(Modal)`
-  background: #9e9e9e;
+  /* background: #9e9e9e; */
 `;
 
 function addNewLabel(label, type, labels, changeLabels) {
@@ -86,90 +86,89 @@ function CardLabels({ labels, setLabel, changeLabels }) {
   return (
     <>
       {/* <Col md={4}> */}
-        <CustomCard>
-          <Card.Header as="h3">
-            <Row>
-              <Col style={{ display: "flex", margin: "auto 0rem" }}>
-                Labels
-                <DropdownTypes
-                  types={typeLabels}
-                  setTypeLabel={setTypeLabel}
-                  selectedType={typeLabel}
-                />
-              </Col>
-              <Col md={4}>
-                <OverlayTrigger
-                  overlay={<Tooltip id="tooltip-disabled">Add Label</Tooltip>}
-                >
-                  <PlusButton onClick={() => setNewLabelModal(true)}>
-                    <FontAwesomeIcon icon={faPlus} color="white" size="sm" />
-                  </PlusButton>
-                </OverlayTrigger>
-              </Col>
-            </Row>
-            <Modal
-              show={newLabelModal}
-              centered
-              size="lg"
-              onClose={() => setNewLabelModal(false)}
-              onHide={() => setNewLabelModal(false)}
-            >
-              <Modal.Header style={{ background: "#bdbdbd" }} closeButton>
-                <Modal.Title>Add New Label</Modal.Title>
-              </Modal.Header>
-              <Modal.Body style={{ background: "#bdbdbd" }}>
-                <Row>
-                  <Col md={4}>
-                    <h5>Label</h5>
-                    <Form.Control
-                      type="text"
-                      as="input"
-                      size="sm"
-                      value={newLabel}
-                      onChange={(e) => setNewLabel(e.target.value)}
-                      placeholder="Enter label"
-                      style={{ background: "#bdbdbd" }}
-                    />
-                  </Col>
-                  <Col>
-                    <h5 style={{ marginLeft: "0.9rem" }}>Types</h5>
-                    <DropdownTypes
-                      types={typeLabels}
-                      setTypeLabel={setTypeLabel}
-                      selectedType={typeLabel}
-                      text="Type of File"
-                    />
-                  </Col>
-                </Row>
-              </Modal.Body>
-              <Modal.Footer style={{ background: "#bdbdbd" }}>
-                <Labels
-                  variant="secondary"
-                  onClick={() => {
-                    setNewLabelModal(false);
-
-                    addNewLabel(newLabel, typeLabel, labels, changeLabels);
-                  }}
-                >
-                  Done
-                </Labels>
-              </Modal.Footer>
-            </Modal>
-          </Card.Header>
-          <Card.Body>
-            {Object.keys(filteredLabels).map((label) => (
+      <CustomCard>
+        <Card.Header as="h3">
+          <Row>
+            <Col style={{ display: "flex", margin: "auto 0rem" }}>
+              Labels
+              <DropdownTypes
+                types={typeLabels}
+                setTypeLabel={setTypeLabel}
+                selectedType={typeLabel}
+              />
+            </Col>
+            <Col md={4}>
+              <OverlayTrigger
+                overlay={<Tooltip id="tooltip-disabled">Add Label</Tooltip>}
+              >
+                <PlusButton onClick={() => setNewLabelModal(true)}>
+                  <FontAwesomeIcon icon={faPlus} color="white" size="sm" />
+                </PlusButton>
+              </OverlayTrigger>
+            </Col>
+          </Row>
+          <Modal
+            show={newLabelModal}
+            centered
+            size="lg"
+            onClose={() => setNewLabelModal(false)}
+            onHide={() => setNewLabelModal(false)}
+          >
+            <Modal.Header  closeButton>
+              <Modal.Title>Add New Label</Modal.Title>
+            </Modal.Header>
+            <Modal.Body >
+              <Row>
+                <Col md={4}>
+                  <h5>Label</h5>
+                  <Form.Control
+                    type="text"
+                    as="input"
+                    size="sm"
+                    value={newLabel}
+                    onChange={(e) => setNewLabel(e.target.value)}
+                    placeholder="Enter label"
+                    
+                  />
+                </Col>
+                <Col>
+                  <h5 style={{ marginLeft: "0.9rem" }}>Types</h5>
+                  <DropdownTypes
+                    types={typeLabels}
+                    setTypeLabel={setTypeLabel}
+                    selectedType={typeLabel}
+                    text="Type of File"
+                  />
+                </Col>
+              </Row>
+            </Modal.Body>
+            <Modal.Footer >
               <Labels
-                variant="dark"
-                style={{ color: labels[label]["color"] }}
+                variant="secondary"
                 onClick={() => {
-                  setLabel(label);
+                  setNewLabelModal(false);
+                  addNewLabel(newLabel, typeLabel, labels, changeLabels);
                 }}
               >
-                {label}
+                Done
               </Labels>
-            ))}
-          </Card.Body>
-        </CustomCard>
+            </Modal.Footer>
+          </Modal>
+        </Card.Header>
+        <Card.Body>
+          {Object.keys(filteredLabels).map((label) => (
+            <Labels
+              variant="dark"
+              style={{ color: labels[label]["color"] }}
+              onClick={() => {
+                setLabel(label);
+              }}
+            >
+              {label}
+            </Labels>
+          ))}
+        </Card.Body>
+      </CustomCard>
       {/* </Col> */}
     </>
   );
