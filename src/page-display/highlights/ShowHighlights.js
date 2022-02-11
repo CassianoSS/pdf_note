@@ -37,11 +37,13 @@ function ShowHighlights({ highlights, width, height, pageNumber, isActive }) {
           ctx.globalAlpha = 0.4; // Opacity
           ctx.fillStyle = highlight.color; // rectangle color
           ctx.fillRect(x1, y1, x2 - x1, y2 - y1); // fill rectangle
+          // ctx.scale(2, 2) // Doubles size of anything draw to canvas.
         });
     }
   }, [highlights, pageNumber, isActive]);
 
   return (
+    
     <canvas
       id="highlightCanvas"
       className="highlights"

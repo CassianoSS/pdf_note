@@ -23,7 +23,12 @@ function CustomPageDisplay({ inputPDF }) {
   const [color, setColor] = useState("yellow");
   const [tag, setTag] = useState("");
   const [labels, setLabels] = useState({
-    label1: { color: "yellow", type: "Geral" },
+    title: { color: "yellow", type: "General" },
+    introduction: { color: "green", type: "General" },
+    bibliography: { color: "lightgrey", type: "General" },
+    author: { color: "lightblue", type: "Authors" },
+    email: { color: "cyan", type: "Authors" },
+    city: { color: "lightgreen", type: "Authors" },
   });
   const [highlights, setHighlights] = useState([]);
   const [data, setData] = useState({});
@@ -43,8 +48,6 @@ function CustomPageDisplay({ inputPDF }) {
       ...highlights,
       Highlight(pageNumber, rectPosition, color, tag),
     ]);
-    console.log("AQUI ESTA HIGHLIGHTS");
-    console.log(highlights);
   }
 
   function checkEquals(rectPosition) {

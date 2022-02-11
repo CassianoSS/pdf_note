@@ -62,8 +62,8 @@ function addNewLabel(label, type, labels, changeLabels) {
 
 function CardLabels({ labels, setLabel, changeLabels }) {
   const [newLabelModal, setNewLabelModal] = useState(false);
-  const [newLabel, setNewLabel] = useState("label");
-  const [typeLabel, setTypeLabel] = useState("Geral");
+  const [newLabel, setNewLabel] = useState("");
+  const [typeLabel, setTypeLabel] = useState("General");
   const [typeLabels, setTypeLabels] = useState([]);
   const [filteredLabels, setFilteredLabels] = useState({});
 
