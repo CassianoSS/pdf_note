@@ -1,23 +1,21 @@
-import { v1 } from 'uuid';
+import { v1 } from "uuid";
 
-export const Highlight = (pageNumber, getRect, color = 'yellow') => {
+export const Highlight = (pageNumber, getRect, color = "yellow", tag = "") => {
   // Create a newHighlight
+  const textSelected = window.getSelection();
   const newHighlight = {
     id: v1(),
     content: {
       // Get the text selected
-      text: window.getSelection().toString()
+      text: textSelected.toString(),
+      texts: textSelected.toString().split(" "),
     },
-    position: {
-      x1: getRect.x,
-      y1: getRect.y,
-      x2: getRect.right,
-      y2: getRect.bottom
-    },
-    color: color,
-    pageNumber: pageNumber,
-    show: false
-  }
-
-  return newHighlight
-}
+    position: [getRect.x, getRect.y, getRect.right, getRect.bottom],
+    color,
+    pageNumber,
+    tag,
+    draw: false,
+  };
+  textSelected.removeAllRanges();
+  return newHighlight;
+};
