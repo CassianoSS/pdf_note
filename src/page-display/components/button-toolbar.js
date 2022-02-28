@@ -61,23 +61,6 @@ function Toolbar({
           </CustomButton>
         </ButtonGroup>
         <ButtonGroup className="me-2" aria-label="Second group">
-          {/* <CustomButton
-                        onClick={zoomOut}
-                    >
-
-                        <FontAwesomeIcon
-                            icon={faSearchMinus}
-                            color="white"
-                        />
-                    </CustomButton>
-                    <CustomButton
-                        onClick={zoomIn}
-                    >
-                        <FontAwesomeIcon
-                            icon={faSearchPlus}
-                            color="white"
-                        />
-                    </CustomButton> */}
         </ButtonGroup>
         <ButtonGroup>
           <OverlayTrigger
@@ -101,11 +84,6 @@ function Toolbar({
               <FontAwesomeIcon icon={faPencilRuler} color="white" />
             </IconButton>
           </OverlayTrigger>
-          {/* <CustomButton
-                        onClick={toggleShowActiveHighlight}
-                    >
-                        Show highlights
-                    </CustomButton> */}
         </ButtonGroup>
         <PageNumberDisplay>
           Page {pageNumber || (numPages ? 1 : "--")}/{numPages || "--"}
@@ -115,39 +93,6 @@ function Toolbar({
             Save
           </CustomButton>
         </ButtonGroup>
-        {/* <Col md={2}>
-                    {
-                        (function () {
-                            if (!isHighlightActive && !isAreaHighlightActive) {
-                                return (
-                                    <>
-                                        <PageNumberDisplay>
-                                            Nothing
-                                        </PageNumberDisplay>
-                                    </>
-                                );
-                            }
-                            else if (isHighlightActive && !isAreaHighlightActive) {
-                                return (
-                                    <>
-                                        <PageNumberDisplay>
-                                            Highlight is active
-                                        </PageNumberDisplay>
-                                    </>
-                                );
-                            }
-                            else if (!isHighlightActive && isAreaHighlightActive) {
-                                return (
-                                    <>
-                                        <PageNumberDisplay>
-                                            Area Highlight is active
-                                        </PageNumberDisplay>
-                                    </>
-                                );
-                            }
-                        })()
-                    }
-                </Col> */}
       </Styles>
     </>
   );

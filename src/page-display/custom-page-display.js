@@ -103,19 +103,7 @@ function CustomPageDisplay({ inputPDF }) {
     return data;
   }
   function submit() {
-    // const data = { pages: [] };
-    // var pageInsert = Array(numPages).fill(-1);
-    // highlights.forEach((highlight) => {
-    //   var pageNumber = highlight["pageNumber"];
-    //   if (pageInsert[pageNumber - 1] == -1) {
-    //     data["pages"].push({ pageNumber, highlights: [highlight] });
-    //     pageInsert[pageNumber - 1] = data["pages"].length - 1;
-    //   } else {
-    //     var position = pageInsert[pageNumber - 1];
-    //     data["pages"][position]["highlights"].push(highlight);
-    //   }
-    // });
-    // console.log(data);
+
     const data = refreshData();
     handleSaveToPC(data);
   }
@@ -176,13 +164,6 @@ function CustomPageDisplay({ inputPDF }) {
     l[newLabel["tag"]] = { color: newLabel["color"], type: newLabel["type"] };
     setLabels(l);
   }
-
-  // useEffect(() => {
-  //   if (isAreaHighlightActive && isHighlightActive) {
-  //     setisHighlightActive(false);
-  //     setisAreaHighlightActive(false);
-  //   }
-  // });
 
   return (
     <Layout>
